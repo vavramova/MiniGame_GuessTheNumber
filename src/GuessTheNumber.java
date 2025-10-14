@@ -4,32 +4,47 @@ import java.util.Scanner;
  *
  */
 public class GuessTheNumber {
-    public static void main(String[] args){
+    public static void main(String[] args) {
         //Welcome message
         System.out.println("Welcome to Guess the Number!");
         System.out.println("Let`s start!");
 
         //Generating a random number
-        int secretNum = (int)(Math.random() * 100) + 1;
+        int secretNum = (int) (Math.random() * 100) + 1;
         System.out.println("I generated a number!");
 
-        //Reading user`s Number
-        System.out.println("Now it`s your turn to enter a number");
-        Scanner userInput = new Scanner(System.in);
-        int userGuess = userInput.nextInt();
+        //Choosing amount of tries
+        System.out.println("Choose amount of tries: ");
+        Scanner userMaxTriesInput = new Scanner(System.in);
+        int maxTries = userMaxTriesInput.nextInt();
 
-        System.out.println("Your guess: " + userGuess);
+        //hints
+        int attempts = 0;
+        boolean guessed = false;
+        while (attempts < maxTries) {
+            System.out.println("Now it`s your turn to enter a number");
+            Scanner userGuessInput = new Scanner(System.in);
+            int userGuess = userGuessInput.nextInt();
+            attempts++;
 
-        //hint
-        if(userGuess == secretNum){
-            System.out.println("Congrats! You guessed the number!");
-        }else if(userGuess < secretNum){
-            System.out.println("Try again! :( The number is bigger");
-        }else {
-            System.out.println("Try again! :( The number is smaller");
+
+            if (userGuess == secretNum) {
+                System.out.println("Congrats! You guessed the number!");
+                guessed = true;
+                break;
+            } else if (userGuess < secretNum) {
+                System.out.println("Try again! :( The number is bigger");
+            } else {
+                System.out.println("Try again! :( The number is smaller");
+            }
+
+            int attemptsLeft = maxTries - attempts;
+            System.out.println("Attempts left: " + attemptsLeft);
+
         }
 
+        if(!guessed) {
+            System.out.println("Sorry! You have no attempts left! The number was " + secretNum);
         }
-
     }
-
+}
