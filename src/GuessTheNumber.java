@@ -20,8 +20,16 @@ public class GuessTheNumber {
 
         System.out.println("Your guess: " + userGuess);
 
+        //hint
+        if(userGuess == secretNum){
+            System.out.println("Congrats! You guessed the number!");
+        }else if(userGuess < secretNum){
+            System.out.println("Try again! :( The number is bigger");
+        }else {
+            System.out.println("Try again! :( The number is smaller");
+        }
 
-
+        }
 
     }
-}
+
