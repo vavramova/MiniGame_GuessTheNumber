@@ -13,7 +13,7 @@ public class MyFrameGSSN extends JFrame {
 
     private int secretNum;
     private int attempts;
-    private final int maxTries = 8;
+    private int maxTries;
 
     public MyFrameGSSN(){
         setTitle("Guess the Number");
@@ -27,7 +27,8 @@ public class MyFrameGSSN extends JFrame {
         secretNum = (int)(Math.random() * 100) + 1;
         attempts = 0;
 
-        attField = new JTextField(5);
+        //attempts
+        attField = new JTextField(2);
         attemptsMsgLabel = new JLabel("Choose your attempts");
         setAttemptsButton = new JButton("Go!");
 
@@ -35,13 +36,22 @@ public class MyFrameGSSN extends JFrame {
         add(attemptsMsgLabel);
         add(setAttemptsButton);
 
-        inputField = new JTextField(10);
+        //guess
+        inputField = new JTextField(5);
         msgLabel = new JLabel("Guess the number from 1 to 100. You have 8 attempts!");
         guessButton = new JButton("Try!");
 
         add(inputField);
         add(msgLabel);
         add(guessButton);
+
+        setAttemptsButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String text = attField.getText();
+
+            }
+        });
 
         guessButton.addActionListener(new ActionListener() {
             @Override
