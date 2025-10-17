@@ -7,6 +7,9 @@ public class MyFrameGSSN extends JFrame {
     private JTextField inputField;
     private JLabel msgLabel;
     private JButton guessButton;
+    private JButton setAttemptsButton;
+    private JLabel attemptsMsgLabel;
+    private JTextField attField;
 
     private int secretNum;
     private int attempts;
@@ -19,9 +22,18 @@ public class MyFrameGSSN extends JFrame {
         setSize(420,420);
         setVisible(true);
         setLayout(new FlowLayout());
+        //getContentPane().setBackground(Color.red);
 
         secretNum = (int)(Math.random() * 100) + 1;
         attempts = 0;
+
+        attField = new JTextField(5);
+        attemptsMsgLabel = new JLabel("Choose your attempts");
+        setAttemptsButton = new JButton("Go!");
+
+        add(attField);
+        add(attemptsMsgLabel);
+        add(setAttemptsButton);
 
         inputField = new JTextField(10);
         msgLabel = new JLabel("Guess the number from 1 to 100. You have 8 attempts!");

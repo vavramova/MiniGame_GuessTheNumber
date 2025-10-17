@@ -14,9 +14,9 @@ public class GuessTheNumber {
         System.out.println("I generated a number!");
 
         //Choosing amount of tries
-        //System.out.println("Choose amount of tries: ");
-        //Scanner userMaxTriesInput = new Scanner(System.in);
-        int maxTries = 8;
+        System.out.println("Choose amount of tries: ");
+        Scanner userMaxTriesInput = new Scanner(System.in);
+        int maxTries = userMaxTriesInput.nextInt();
 
         //hints
         int attempts = 0;
