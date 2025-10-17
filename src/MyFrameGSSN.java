@@ -28,47 +28,60 @@ public class MyFrameGSSN extends JFrame {
         attempts = 0;
 
         //attempts
-        attField = new JTextField(2);
-        attemptsMsgLabel = new JLabel("Choose your attempts");
-        setAttemptsButton = new JButton("Go!");
+        JPanel attemptsPanel = new JPanel();
+        attemptsPanel.add(attField = new JTextField(2));
+        attemptsPanel.add(attemptsMsgLabel = new JLabel("Choose your attempts"));
+        attemptsPanel.add(setAttemptsButton = new JButton("Go!"));
 
-        add(attField);
-        add(attemptsMsgLabel);
-        add(setAttemptsButton);
 
         //guess
-        inputField = new JTextField(5);
-        msgLabel = new JLabel("Guess the number from 1 to 100. You have 8 attempts!");
-        guessButton = new JButton("Try!");
+        JPanel guessPanel = new JPanel();
+        guessPanel.add(inputField = new JTextField(5));
+        guessPanel.add(msgLabel = new JLabel("Guess the number from 1 to 100!"));
+        guessPanel.add(guessButton = new JButton("Try!"));
 
-        add(inputField);
-        add(msgLabel);
-        add(guessButton);
+       //msgLabel = new JLabel("Guess the number from 1 to 100!");
 
-        setAttemptsButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+        add(attemptsPanel);
+        //add(msgLabel);
+        add(guessPanel);
+
+        setAttemptsButton.addActionListener(e ->{
+
                 String text = attField.getText();
 
-            }
+                try{
+                    maxTries = Integer.parseInt(text);
+                    attempts = 0;
+                    //msgLabel.setText("You have " + maxTries + " attempts!");
+                    //guessButton.setEnabled(true);
+                    setAttemptsButton.setEnabled(false);
+                }catch (NumberFormatException ex){
+                    msgLabel.setText("Please enter an integer!");
+                }
+
+
         });
 
-        guessButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+
+        guessButton.addActionListener(e->{
+
                 String txt = inputField.getText();
 
                 try{
                     int guess = Integer.parseInt(txt);
                     attempts++;
+                    int counter = maxTries;
 
                     if(guess == secretNum){
                         msgLabel.setText("Congrats! You guessed the number!");
                         guessButton.setEnabled(false);
                     }else if(guess < secretNum){
-                        msgLabel.setText("Try again! :( The number is bigger");
+                        counter--;
+                        msgLabel.setText("Try again! :( The number is bigger. You have " + counter + " attempts left");
                     }else{
-                        msgLabel.setText("Try again! :( The number is smaller");
+                        counter--;
+                        msgLabel.setText("Try again! :( The number is smaller, You have " + counter + " attempts left");
                     }
 
                     if(attempts >= maxTries && guess != secretNum){
@@ -80,7 +93,7 @@ public class MyFrameGSSN extends JFrame {
                 }catch(NumberFormatException exc){
                     msgLabel.setText("Please enter an integer!");
                 }
-            }
+
         });
     }
 
