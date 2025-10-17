@@ -40,10 +40,8 @@ public class MyFrameGSSN extends JFrame {
         guessPanel.add(msgLabel = new JLabel("Guess the number from 1 to 100!"));
         guessPanel.add(guessButton = new JButton("Try!"));
 
-       //msgLabel = new JLabel("Guess the number from 1 to 100!");
 
         add(attemptsPanel);
-        //add(msgLabel);
         add(guessPanel);
 
         setAttemptsButton.addActionListener(e ->{
@@ -53,14 +51,10 @@ public class MyFrameGSSN extends JFrame {
                 try{
                     maxTries = Integer.parseInt(text);
                     attempts = 0;
-                    //msgLabel.setText("You have " + maxTries + " attempts!");
-                    //guessButton.setEnabled(true);
                     setAttemptsButton.setEnabled(false);
                 }catch (NumberFormatException ex){
                     msgLabel.setText("Please enter an integer!");
                 }
-
-
         });
 
 
@@ -71,17 +65,14 @@ public class MyFrameGSSN extends JFrame {
                 try{
                     int guess = Integer.parseInt(txt);
                     attempts++;
-                    int counter = maxTries;
 
                     if(guess == secretNum){
-                        msgLabel.setText("Congrats! You guessed the number!");
+                        msgLabel.setText("Congrats! You guessed the number in " + attempts + " tries!");
                         guessButton.setEnabled(false);
                     }else if(guess < secretNum){
-                        counter--;
-                        msgLabel.setText("Try again! :( The number is bigger. You have " + counter + " attempts left");
+                        msgLabel.setText("Try again! :( The number is bigger. You have " + (maxTries - attempts) + " attempts left");
                     }else{
-                        counter--;
-                        msgLabel.setText("Try again! :( The number is smaller, You have " + counter + " attempts left");
+                        msgLabel.setText("Try again! :( The number is smaller, You have " + (maxTries - attempts) + " attempts left");
                     }
 
                     if(attempts >= maxTries && guess != secretNum){
